@@ -4,14 +4,13 @@ package com.jdc.web.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import org.springframework.expression.spel.ast.NullLiteral;
 
 import java.io.Serial;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "Sedes")
-public class Sedes implements Serializable {
+public class SedeEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -30,6 +29,19 @@ public class Sedes implements Serializable {
     @Size(min = 0,max = 50)
     @Column(name= "direccion")
     private String direccion;
+
+    @NotNull
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "idcolegio", referencedColumnName = "idcolegio", nullable = false)
+    private ColegioEntity colegio;
+
+    public ColegioEntity getColegio() {
+        return colegio;
+    }
+
+    public void setColegio(ColegioEntity colegio) {
+        this.colegio = colegio;
+    }
 
     public int getIdSede() {
         return idSede;

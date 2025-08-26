@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "contactos")
-public class Contactos implements Serializable {
+public class ContactoEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -29,6 +29,8 @@ public class Contactos implements Serializable {
     @Size(min = 1, max = 10)
     @Column(name="numero")
     private String numero ;
+
+
 
     public int getIdcontatcto() {
         return idcontatcto;

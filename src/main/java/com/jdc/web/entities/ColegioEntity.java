@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="colegios")
-public class Colegios implements Serializable {
+public class ColegioEntity implements Serializable {
 
 
     @Serial

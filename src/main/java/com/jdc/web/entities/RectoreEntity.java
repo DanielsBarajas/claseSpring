@@ -3,15 +3,18 @@ package com.jdc.web.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 
 @Entity
 @Table(name = "Rectores")
-public class Rectores implements Serializable {
+public class RectoreEntity implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
@@ -48,7 +51,31 @@ public class Rectores implements Serializable {
 
     @NotNull
     @Column(name= "fechanacimiento")
-    private LocalDate fechanacimiento;
+    @DateTimeFormat(pattern = "yyy-MM-dd")
+    private Date fechanacimiento;
+
+
+    @OneToOne
+    @JoinColumn(name = " idcolegio", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private ColegioEntity colegios;
+
+    public ColegioEntity getColegios() {
+        return colegios;
+    }
+
+    public void setColegios(ColegioEntity colegios) {
+        this.colegios = colegios;
+    }
+
+    public Date getFechanacimiento() {
+
+        return fechanacimiento;
+    }
+
+    public void setFechanacimiento(Date fechanacimiento) {
+        this.fechanacimiento = fechanacimiento;
+    }
 
     public int getIdrector() {
         return idrector;
@@ -98,11 +125,4 @@ public class Rectores implements Serializable {
         this.tipodocumento = tipodocumento;
     }
 
-    public LocalDate getFechanacimiento() {
-        return fechanacimiento;
-    }
-
-    public void setFechanacimiento(LocalDate fechanacimiento) {
-        this.fechanacimiento = fechanacimiento;
-    }
 }
